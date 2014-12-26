@@ -6,6 +6,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwt.kyu.client.presenters.DetailPresenter;
 import com.gwt.kyu.shared.Person;
@@ -37,6 +39,12 @@ public class DetailView extends Composite implements DetailPresenter.Display{
 	
 	@UiField
 	Button login;
+	
+	@UiField
+	TextBox stuIDTxt;
+	
+	@UiField
+	PasswordTextBox pwordTxt;
 
 	@Override
 	public Button getExit() {
@@ -52,5 +60,25 @@ public class DetailView extends Composite implements DetailPresenter.Display{
 	
 	@UiField 
 	Button exitBtn;
+	
+
+
+	@Override
+	public Button getLogin() {
+		// TODO Auto-generated method stub
+		return login;
+	}
+
+	@Override
+	public TextBox getStudentID() {
+		// TODO Auto-generated method stub
+		return stuIDTxt;
+	}
+
+	@Override
+	public PasswordTextBox getPassword() {
+		// TODO Auto-generated method stub
+		return pwordTxt;
+	}
 
 }

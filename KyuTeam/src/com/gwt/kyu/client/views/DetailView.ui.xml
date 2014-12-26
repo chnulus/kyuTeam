@@ -8,12 +8,12 @@
 		<g:Label ui:field="userLbl"></g:Label>
 		<g:Button ui:field="exitBtn" text="Çıkış"></g:Button>
 		<center>
-			<g:Label ui:field="name" text="Name : "></g:Label>
-			<g:TextBox ui:field="nameTxt">
+			<g:Label ui:field="stuID" text="StudentID : "></g:Label>
+			<g:TextBox ui:field="stuIDTxt">
 			</g:TextBox>
 			<br />
-			<g:Label ui:field="phone" text="Phone : "></g:Label>
-			<g:TextBox ui:field="phoneTxt"></g:TextBox>
+			<g:Label ui:field="pword" text="Password : "></g:Label>
+			<g:PasswordTextBox ui:field="pwordTxt"/>
 			<br />
 			<div id="myBtn">
 				<g:Button ui:field="login" text="Login"></g:Button>

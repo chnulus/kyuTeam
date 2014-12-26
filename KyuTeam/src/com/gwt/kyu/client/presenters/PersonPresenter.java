@@ -13,10 +13,11 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
+import com.google.gwt.view.client.SingleSelectionModel;
 import com.gwt.kyu.client.views.DetailView;
 import com.gwt.kyu.shared.Person;
+import com.gwt.kyu.shared.Student;
 
 public class PersonPresenter implements Presenter {
 	Display view;
@@ -25,6 +26,8 @@ public class PersonPresenter implements Presenter {
 	Presenter presenter;
 	
 	Person selectedObject;
+	
+	Student student;
 	
 	public final SingleSelectionModel<Person> ssm = new SingleSelectionModel<Person>();
 
@@ -72,8 +75,8 @@ public class PersonPresenter implements Presenter {
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
 			try{
-			
-			 presenter = new DetailPresenter(selectedObject,new DetailView());
+			 student = new Student();
+			 presenter = new DetailPresenter(selectedObject,student.getStudentList(),new DetailView());
 			 presenter.go(RootPanel.get());
 			 
 			}catch(Exception ex){
