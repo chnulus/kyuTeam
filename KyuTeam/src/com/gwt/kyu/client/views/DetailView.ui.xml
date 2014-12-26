@@ -16,7 +16,7 @@
 			<g:TextBox ui:field="phoneTxt"></g:TextBox>
 			<br />
 			<div id="myBtn">
-				<g:Button ui:field="save" text="Save"></g:Button>
+				<g:Button ui:field="login" text="Login"></g:Button>
 			</div>
 		</center>
 	</g:HTMLPanel>

@@ -35,6 +35,8 @@ public class DetailView extends Composite implements DetailPresenter.Display{
 	@UiField
 	Label userLbl;
 	
+	@UiField
+	Button login;
 
 	@Override
 	public Button getExit() {
