@@ -2,6 +2,7 @@ package com.gwt.kyu.shared;
 
 import java.util.ArrayList;
 public class Person {
+	//kafana sýcayým
 	private String PersonName;
 	private String PersonSurname;
 	private String PersonMail;
