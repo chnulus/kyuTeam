@@ -93,7 +93,7 @@ public class DetailPresenter implements Presenter{
 				}
 				
 				if(count == 0){
-					Window.alert("Olmadý Genncccccccccccccc");
+					Window.alert("Olmadi Genncccccccccccccc");
 				}
 			}
 		});
