@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<g:MenuBar>
+			<g:MenuItem text="File" ui:field="fileBtn">
+				<g:MenuBar vertical="true">
+					<g:MenuItem text="New" ui:field="newBtn"/>
+					<g:MenuItem text="Open File" ui:field="openBtn"/>
+					<g:MenuItem text="Exit" ui:field="exitBtn"/>
+				</g:MenuBar>
+			</g:MenuItem>
+			<g:MenuItem text="Edit"/>
+			<g:MenuItem text="Navigate"/>
+			<g:MenuItem text="Search"/>
+		</g:MenuBar>
+	</g:HTMLPanel>
+</ui:UiBinder> 

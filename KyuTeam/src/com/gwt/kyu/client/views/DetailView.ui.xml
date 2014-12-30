@@ -11,6 +11,7 @@
 			<g:Label ui:field="stuID" text="StudentID : "></g:Label>
 			<g:TextBox ui:field="stuIDTxt">
 			</g:TextBox>
+			<g:Label ui:field="errorMsg" text=""/>
 			<br />
 			<g:Label ui:field="pword" text="Password : "></g:Label>
 			<g:PasswordTextBox ui:field="pwordTxt"/>

@@ -56,7 +56,6 @@ public class PersonPresenter implements Presenter {
 	view.getSelectedObject().setSelectionModel(ssm);
 	fillList();
 	getSelectItem();
-	
 	ssm.addSelectionChangeHandler(new Handler() {
 
 		@Override
