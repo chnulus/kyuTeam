@@ -2,10 +2,16 @@ package com.gwt.kyu.client.presenters;
 
 import java.util.ArrayList;
 
+import com.google.gwt.cell.client.ButtonCell;
+import com.google.gwt.cell.client.CheckboxCell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
@@ -19,105 +25,179 @@ import com.gwt.kyu.client.views.DetailView;
 import com.gwt.kyu.shared.Person;
 import com.gwt.kyu.shared.Student;
 
+
 public class PersonPresenter implements Presenter {
 	Display view;
 	ArrayList<Person> personList;
-	
+
 	Presenter presenter;
-	
+
 	Person selectedObject;
-	
+
 	Student student;
-	
+
 	public final SingleSelectionModel<Person> ssm = new SingleSelectionModel<Person>();
 
-	
-	public interface Display{
+	public interface Display {
 		public void clear();
+
 		public Widget asWidget();
+
 		public void setPresenter(PersonPresenter personPresenter);
-		public void fillTable(ArrayList<Person> personList);
+
 		public ListBox getCityBox();
+
 		public Label getlbl();
+
 		public CellTable<Person> getSelectedObject();
+
 		public HasClickHandlers getDetail();
+
 	}
-	 public PersonPresenter(ArrayList<Person> personList,Display view) {
-		this.view=view;
-		this.personList=personList;
+
+	public PersonPresenter(ArrayList<Person> personList, Display view) {
+		this.view = view;
+		this.personList = personList;
 		bind();
 	}
+
 	@Override
 	public void bind() {
 		// TODO Auto-generated method stub
-	view.setPresenter(this);
-	view.clear();
-	view.fillTable(personList);	
-	view.getSelectedObject().setSelectionModel(ssm);
-	fillList();
-	getSelectItem();
-	ssm.addSelectionChangeHandler(new Handler() {
+		view.setPresenter(this);
+		view.getSelectedObject().setSelectionModel(ssm);
+		view.clear();
+		fillList();
+		fillTable(personList);
+		getSelectItem();
 
-		@Override
-		public void onSelectionChange(final SelectionChangeEvent event)
+		view.getDetail().addClickHandler(new ClickHandler() {
 
-		{
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				try {
+					student = new Student();
+					presenter = new DetailPresenter(selectedObject, student
+							.getStudentList(), new DetailView());
+					presenter.go(RootPanel.get());
 
-			selectedObject = ssm.getSelectedObject();
-		}
+				} catch (Exception ex) {
+					Window.alert("Satir Sec!!!");
 
-	});
-	
-	view.getDetail().addClickHandler(new ClickHandler() {
-		
-		@Override
-		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
-			try{
-			 student = new Student();
-			 presenter = new DetailPresenter(selectedObject,student.getStudentList(),new DetailView());
-			 presenter.go(RootPanel.get());
-			 
-			}catch(Exception ex){
-				Window.alert("Satir Sec!!!");
-				
+				}
 			}
-			 }
-	});
-	
+		});
+
 	}
-	
-	public void fillList(){
-		
+
+	public void fillList() {
+
 		ArrayList<String> city = new ArrayList<String>();
-		
+
 		city.add("Istanbul");
 		city.add("Ankara");
 		city.add("Izmir");
 		city.add("Antalya");
-		
-		for(String cities: city){
+
+		for (String cities : city) {
 			view.getCityBox().addItem(cities);
 		}
-		
+
 	}
 
-	
-	public void getSelectItem(){
-		
+	public void getSelectItem() {
+
 		view.getCityBox().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				view.getlbl().setText("City : "+view.getCityBox().getItemText(view.getCityBox().getSelectedIndex()));
+				view.getlbl().setText(
+						"City : "
+								+ view.getCityBox().getItemText(
+										view.getCityBox().getSelectedIndex()));
 			}
 		});
-		
+
 	}
-	
-	
-	
+
+	public void fillTable(ArrayList<Person> personList) {
+		
+		CheckboxCell erk = new CheckboxCell();
+		
+		 Column<Person, Boolean> checkColumn = new Column<Person, Boolean>(
+			        new CheckboxCell(true, false)) {
+			      @Override
+			      public Boolean getValue(Person object) {
+			        // Get the value from the selection model.
+			        return ssm.isSelected(object);
+			      }
+			   };
+			   
+			   checkColumn.setFieldUpdater(new FieldUpdater<Person, Boolean>() {
+					public void update(int index, Person object, Boolean value) {
+										
+						Window.alert(object.getPersonName());
+
+					}
+				});
+		TextColumn<Person> nameColumn = new TextColumn<Person>() {
+			@Override
+			public String getValue(Person object) {
+				return object.getPersonName();
+			}
+		};
+
+		// Add a date column to show the birthday.
+		TextColumn<Person> surNameColumn = new TextColumn<Person>() {
+			@Override
+			public String getValue(Person object) {
+				return object.getPersonSurname();
+			}
+		};
+
+		TextColumn<Person> mailColumn = new TextColumn<Person>() {
+			@Override
+			public String getValue(Person object) {
+				return object.getPersonMail();
+			}
+		};
+
+		ButtonCell PreviewButton = new ButtonCell();
+		Column<Person, String> Preview = new Column<Person, String>(
+				PreviewButton) {
+			public String getValue(Person object) {
+				// TODO Auto-generated method stub
+
+				return "Detail";
+			}
+		};
+
+		Preview.setFieldUpdater(new FieldUpdater<Person, String>() {
+			public void update(int index, Person object, String value) {
+								
+				student = new Student();
+				presenter = new DetailPresenter(object, student
+						.getStudentList(), new DetailView());
+				presenter.go(RootPanel.get());
+
+			}
+		});
+
+		view.getSelectedObject().addColumn(checkColumn,"CheckBox");
+		view.getSelectedObject().addColumn(nameColumn, "Isim");
+		view.getSelectedObject().addColumn(surNameColumn, "Soyisim");
+		view.getSelectedObject().addColumn(mailColumn,"Phone");
+		view.getSelectedObject().addColumn(Preview, "Detail");
+
+		view.getSelectedObject().setRowCount(personList.size(), true);
+
+		// Push the data into the widget.
+		view.getSelectedObject().setRowData(0, personList);
+
+	}
+
 	@Override
 	public void go(HasWidgets container) {
 		// TODO Auto-generated method stub

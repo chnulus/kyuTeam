@@ -39,6 +39,10 @@ public class PersonPage extends Composite implements PersonPresenter.Display{
 	
 	@UiField
 	CellTable<Person> cellTablePerson;
+	
+	
+	ButtonCell PreviewButton;
+	
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
@@ -49,56 +53,6 @@ public class PersonPage extends Composite implements PersonPresenter.Display{
 	public void setPresenter(PersonPresenter personPresenter) {
 		// TODO Auto-generated method stub
 		this.presenter=personPresenter;
-	}
-
-	@Override
-	public void fillTable(ArrayList<Person> personList) {
-		// TODO Auto-generated method stub
-		TextColumn<Person> nameColumn = new TextColumn<Person>() {
-			@Override
-			public String getValue(Person object) {
-				return object.getPersonName();
-			}
-		};
-
-		TextColumn<Person> surnameColumn = new TextColumn<Person>() {
-			@Override
-			public String getValue(Person object) {
-				return object.getPersonSurname();
-			}
-		};
-
-		TextColumn<Person> phoneColumn = new TextColumn<Person>() {
-			@Override
-			public String getValue(Person object) {
-				return object.getPersonMail();
-			}
-		};
-		
-		
-	      
-			 ButtonCell PreviewButton= new ButtonCell();
-			 Column <Person,String> Preview= new Column<Person,String>(PreviewButton){
-					public String getValue(Person object) {
-							// TODO Auto-generated method stub
-
-							return "Detail";
-						}};   
-			    	      
-			 Preview.setFieldUpdater(new FieldUpdater<Person, String>() {
-					  public void update(int index, Person object, String value) {
-						  
-								
-						  
-							  }
-							}); 	
-		
-		cellTablePerson.addColumn(nameColumn, "Name");
-		cellTablePerson.addColumn(surnameColumn, "Surname");
-		cellTablePerson.addColumn(phoneColumn, "Phone Number");
-		cellTablePerson.addColumn(Preview,"Detail");
-		cellTablePerson.setRowCount(personList.size(), true);
-		cellTablePerson.setRowData(0, personList);
 	}
 
 	@Override
@@ -129,5 +83,10 @@ public class PersonPage extends Composite implements PersonPresenter.Display{
 		// TODO Auto-generated method stub
 		return cellTablePerson;
 	}
+
+
+	
+
+
 	
 }
