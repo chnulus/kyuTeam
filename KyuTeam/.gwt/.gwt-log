@@ -2807,3 +2807,94 @@ Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419952
       Compiling...
          Compilation completed in 0,01 seconds
       Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView.NewViewUiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,04 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955503810.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955503810.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955503810_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView.NewViewUiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955506379.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955506379.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955506379_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView.NewViewUiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955506429.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955506429.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955506429_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView.NewViewUiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955597584.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955597584.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955597584_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView.NewViewUiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955598382.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955598382.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.gwt.kyu.client.views.NewView_NewViewUiBinderImpl_designTime1419955598382_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units

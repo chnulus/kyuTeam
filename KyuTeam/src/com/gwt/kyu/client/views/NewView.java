@@ -3,6 +3,7 @@ package com.gwt.kyu.client.views;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
@@ -32,6 +33,10 @@ public class NewView extends Composite implements NewPresenter.Display{
 	
 	@UiField
 	MenuItem exitBtn;
+	
+	@UiField
+	Button clickBtn;
+	
 	
 	
 	
@@ -71,6 +76,14 @@ public class NewView extends Composite implements NewPresenter.Display{
 	public MenuItem getExit() {
 		// TODO Auto-generated method stub
 		return exitBtn;
+	}
+
+
+
+	@Override
+	public Button getClick() {
+		// TODO Auto-generated method stub
+		return clickBtn;
 	}
 
 }

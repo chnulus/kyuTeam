@@ -2,16 +2,21 @@ package com.gwt.kyu.client.views;
 
 import java.util.ArrayList;
 
+import com.google.gwt.cell.client.ButtonCell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwt.kyu.client.presenters.PersonPresenter;
 import com.gwt.kyu.shared.Person;
@@ -69,9 +74,29 @@ public class PersonPage extends Composite implements PersonPresenter.Display{
 				return object.getPersonMail();
 			}
 		};
+		
+		
+	      
+			 ButtonCell PreviewButton= new ButtonCell();
+			 Column <Person,String> Preview= new Column<Person,String>(PreviewButton){
+					public String getValue(Person object) {
+							// TODO Auto-generated method stub
+
+							return "Detail";
+						}};   
+			    	      
+			 Preview.setFieldUpdater(new FieldUpdater<Person, String>() {
+					  public void update(int index, Person object, String value) {
+						  
+								
+						  
+							  }
+							}); 	
+		
 		cellTablePerson.addColumn(nameColumn, "Name");
 		cellTablePerson.addColumn(surnameColumn, "Surname");
 		cellTablePerson.addColumn(phoneColumn, "Phone Number");
+		cellTablePerson.addColumn(Preview,"Detail");
 		cellTablePerson.setRowCount(personList.size(), true);
 		cellTablePerson.setRowData(0, personList);
 	}

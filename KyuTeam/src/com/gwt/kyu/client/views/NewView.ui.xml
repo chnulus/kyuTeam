@@ -17,5 +17,6 @@
 			<g:MenuItem text="Navigate"/>
 			<g:MenuItem text="Search"/>
 		</g:MenuBar>
+		<g:Button text="Click" ui:field="clickBtn"/>
 	</g:HTMLPanel>
 </ui:UiBinder> 
