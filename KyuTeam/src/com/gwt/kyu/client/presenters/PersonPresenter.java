@@ -65,15 +65,28 @@ public class PersonPresenter implements Presenter {
 	@Override
 	public void bind() {
 		// TODO Auto-generated method stub
+		try{
 		view.setPresenter(this);
 		view.getSelectedObject().setSelectionModel(ssm);
 		view.clear();
 		fillList();
 		fillTable(personList);
 		getSelectItem();
-		
-		view.getDetail().addClickHandler(new DialogHandler());
-
+		final ArrayList<Person> personlist = new ArrayList<Person>();
+		ssm.addSelectionChangeHandler(new Handler() {
+			
+			@Override
+			public void onSelectionChange(SelectionChangeEvent event) {
+				// TODO Auto-generated method stub
+				selectedObject = new Person();
+				selectedObject = ssm.getSelectedObject();
+				personlist.add(selectedObject);
+			}
+		});
+		view.getDetail().addClickHandler(new DialogHandler(personlist));
+		}catch(Exception ex){
+			Window.alert("HATA");
+		}
 //		view.getDetail().addClickHandler(new ClickHandler() {
 //
 //			@Override
