@@ -13,6 +13,7 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -70,24 +71,26 @@ public class PersonPresenter implements Presenter {
 		fillList();
 		fillTable(personList);
 		getSelectItem();
+		
+		view.getDetail().addClickHandler(new DialogHandler());
 
-		view.getDetail().addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				try {
-					student = new Student();
-					presenter = new DetailPresenter(selectedObject, student
-							.getStudentList(), new DetailView());
-					presenter.go(RootPanel.get());
-
-				} catch (Exception ex) {
-					Window.alert("Satir Sec!!!");
-
-				}
-			}
-		});
+//		view.getDetail().addClickHandler(new ClickHandler() {
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
+//				try {
+//					student = new Student();
+//					presenter = new DetailPresenter(selectedObject, student
+//							.getStudentList(), new DetailView());
+//					presenter.go(RootPanel.get());
+//
+//				} catch (Exception ex) {
+//					Window.alert("Satir Sec!!!");
+//
+//				}
+//			}
+//		});
 
 	}
 
@@ -140,6 +143,9 @@ public class PersonPresenter implements Presenter {
 										
 						Window.alert(object.getPersonName());
 
+					
+						
+						
 					}
 				});
 		TextColumn<Person> nameColumn = new TextColumn<Person>() {
@@ -186,8 +192,8 @@ public class PersonPresenter implements Presenter {
 		});
 
 		view.getSelectedObject().addColumn(checkColumn,"CheckBox");
-		view.getSelectedObject().addColumn(nameColumn, "Isim");
-		view.getSelectedObject().addColumn(surNameColumn, "Soyisim");
+		view.getSelectedObject().addColumn(nameColumn, "Name");
+		view.getSelectedObject().addColumn(surNameColumn, "Surname");
 		view.getSelectedObject().addColumn(mailColumn,"Phone");
 		view.getSelectedObject().addColumn(Preview, "Detail");
 
