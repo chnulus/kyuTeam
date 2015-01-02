@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+.body-dialogbox {
+	background-color: white;
+	border: 2px #91c8ff solid;
+	margin: 0px;
+	padding: 0px;
+}
+
+#title {
+	background-color: #91c8ff;
+	color: white;
+	width: 350px;
+	margin: 0px;
+	padding: 0px;
+	margin-right: -1px;
+	margin-left: -1px;
+}
+
+#title2 {
+	color: red;
+	width: 100px;
+}

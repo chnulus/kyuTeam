@@ -78,6 +78,7 @@ public class PersonPresenter implements Presenter {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
+				personlist.clear();
 				selectedObject = new Person();
 				selectedObject = ssm.getSelectedObject();
 				personlist.add(selectedObject);
