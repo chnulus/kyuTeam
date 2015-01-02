@@ -5,6 +5,7 @@
 	border: 2px #91c8ff solid;
 	margin: 0px;
 	padding: 0px;
+	height: 120px;
 }
 
 #title {
@@ -20,4 +21,18 @@
 #title2 {
 	color: red;
 	width: 100px;
+}
+#nodata{
+	font-size: 20px;
+	clear:both;
+	bottom:35px;
+	width:100%;
+	position: absolute;
+}
+.exitbtn{
+	clear:both;
+	bottom:0;
+	float:right;
+	width:50px;
+	position: absolute;
 }

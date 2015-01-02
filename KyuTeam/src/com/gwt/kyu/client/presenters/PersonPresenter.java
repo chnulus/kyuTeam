@@ -4,16 +4,19 @@ import java.util.ArrayList;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.CheckboxCell;
+import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.cell.client.ImageCell;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -25,8 +28,6 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import com.gwt.kyu.client.views.DetailView;
 import com.gwt.kyu.shared.Person;
 import com.gwt.kyu.shared.Student;
-
-
 public class PersonPresenter implements Presenter {
 	Display view;
 	ArrayList<Person> personList;
@@ -59,52 +60,61 @@ public class PersonPresenter implements Presenter {
 	public PersonPresenter(ArrayList<Person> personList, Display view) {
 		this.view = view;
 		this.personList = personList;
+		
+		String winUrl = GWT.getModuleBaseURL() + "help/";
+		String winName = "Testing Window";
+		
+		//openNewWindow(winUrl,winName);
+		
 		bind();
 	}
+
+	ArrayList<Person> personlistInfo;
 
 	@Override
 	public void bind() {
 		// TODO Auto-generated method stub
-		try{
-		view.setPresenter(this);
-		view.getSelectedObject().setSelectionModel(ssm);
-		view.clear();
-		fillList();
-		fillTable(personList);
-		getSelectItem();
-		final ArrayList<Person> personlist = new ArrayList<Person>();
-		ssm.addSelectionChangeHandler(new Handler() {
+		try {
+			view.setPresenter(this);
+			view.getSelectedObject().setSelectionModel(ssm);
+			view.clear();
+			fillList();
+			fillTable(personList);
+			getSelectItem();
+			personlistInfo = new ArrayList<Person>();
+			ssm.addSelectionChangeHandler(new Handler() {
+
+				@Override
+				public void onSelectionChange(SelectionChangeEvent event) {
+					// TODO Auto-generated method stub
+					personlistInfo.clear();
+					selectedObject = new Person();
+					selectedObject = ssm.getSelectedObject();
+					personlistInfo.add(selectedObject);
+				}
+			});
+			view.getDetail().addClickHandler(new DialogHandler(personlistInfo));
 			
-			@Override
-			public void onSelectionChange(SelectionChangeEvent event) {
-				// TODO Auto-generated method stub
-				personlist.clear();
-				selectedObject = new Person();
-				selectedObject = ssm.getSelectedObject();
-				personlist.add(selectedObject);
-			}
-		});
-		view.getDetail().addClickHandler(new DialogHandler(personlist));
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			Window.alert("HATA");
 		}
-//		view.getDetail().addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				// TODO Auto-generated method stub
-//				try {
-//					student = new Student();
-//					presenter = new DetailPresenter(selectedObject, student
-//							.getStudentList(), new DetailView());
-//					presenter.go(RootPanel.get());
-//
-//				} catch (Exception ex) {
-//					Window.alert("Satir Sec!!!");
-//
-//				}
-//			}
-//		});
+		// view.getDetail().addClickHandler(new ClickHandler() {
+		//
+		// @Override
+		// public void onClick(ClickEvent event) {
+		// // TODO Auto-generated method stub
+		// try {
+		// student = new Student();
+		// presenter = new DetailPresenter(selectedObject, student
+		// .getStudentList(), new DetailView());
+		// presenter.go(RootPanel.get());
+		//
+		// } catch (Exception ex) {
+		// Window.alert("Satir Sec!!!");
+		//
+		// }
+		// }
+		// });
 
 	}
 
@@ -136,32 +146,29 @@ public class PersonPresenter implements Presenter {
 										view.getCityBox().getSelectedIndex()));
 			}
 		});
-
 	}
 
 	public void fillTable(ArrayList<Person> personList) {
-		
-		CheckboxCell erk = new CheckboxCell();
-		
-		 Column<Person, Boolean> checkColumn = new Column<Person, Boolean>(
-			        new CheckboxCell(true, false)) {
-			      @Override
-			      public Boolean getValue(Person object) {
-			        // Get the value from the selection model.
-			        return ssm.isSelected(object);
-			      }
-			   };
-			   
-			   checkColumn.setFieldUpdater(new FieldUpdater<Person, Boolean>() {
-					public void update(int index, Person object, Boolean value) {
-										
-						Window.alert(object.getPersonName());
 
-					
-						
-						
-					}
-				});
+		CheckboxCell erk = new CheckboxCell();
+
+		Column<Person, Boolean> checkColumn = new Column<Person, Boolean>(
+				new CheckboxCell(true, false)) {
+			@Override
+			public Boolean getValue(Person object) {
+				// Get the value from the selection model.
+				return ssm.isSelected(object);
+			}
+		};
+
+		checkColumn.setFieldUpdater(new FieldUpdater<Person, Boolean>() {
+			public void update(int index, Person object, Boolean value) {
+
+				//Window.alert(object.getPersonName());
+				
+			}
+		});
+
 		TextColumn<Person> nameColumn = new TextColumn<Person>() {
 			@Override
 			public String getValue(Person object) {
@@ -196,7 +203,7 @@ public class PersonPresenter implements Presenter {
 
 		Preview.setFieldUpdater(new FieldUpdater<Person, String>() {
 			public void update(int index, Person object, String value) {
-								
+
 				student = new Student();
 				presenter = new DetailPresenter(object, student
 						.getStudentList(), new DetailView());
@@ -204,16 +211,34 @@ public class PersonPresenter implements Presenter {
 
 			}
 		});
+		
+		
+		
+		Column<Person, String> imageColumn = new Column<Person, String>(new ImageCell()) {
+		       @Override
+		       public String getValue(Person object) {
+		           return "detail.jpg";
+		          }
+		        };
+		        
+		        
+		        imageColumn.setFieldUpdater(new FieldUpdater<Person, String>() {
+		        public void update(int index, Person object, String value) {
+		        Window.alert("You clicked ");
+		        }
+		        
 
-		view.getSelectedObject().addColumn(checkColumn,"CheckBox");
+		    });
+
+		view.getSelectedObject().addColumn(checkColumn, "CheckBox");
 		view.getSelectedObject().addColumn(nameColumn, "Name");
 		view.getSelectedObject().addColumn(surNameColumn, "Surname");
-		view.getSelectedObject().addColumn(mailColumn,"Phone");
+		view.getSelectedObject().addColumn(mailColumn, "Phone");
 		view.getSelectedObject().addColumn(Preview, "Detail");
+		view.getSelectedObject().addColumn(imageColumn,"DetailImg");
 
 		view.getSelectedObject().setRowCount(personList.size(), true);
 
-		// Push the data into the widget.
 		view.getSelectedObject().setRowData(0, personList);
 
 	}
@@ -224,5 +249,20 @@ public class PersonPresenter implements Presenter {
 		container.clear();
 		container.add(view.asWidget());
 	}
+	
+	public static void openNewWindow(String name, String url) {
+	    com.google.gwt.user.client.Window.open(url, name.replace(" ", "_"),
+	           "menubar=no," + 
+	           "location=false," + 
+	           "resizable=yes," + 
+	           "scrollbars=yes," + 
+	           "status=no," + 
+	           "dependent=true");
+	}
+	
+
+	
+	
+	
 
 }

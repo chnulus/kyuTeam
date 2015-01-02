@@ -24,6 +24,7 @@ public class PopupSampleContentPanel extends VerticalPanel{
 		
 		//setSpacing(5);
 		setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		setTitle("KYU");
 		
 		add(new HTML("<div id='title'>"+"Header"+"</div>"));
 		add(new HTML("<div id='title2'>"+text+"</div>"));
@@ -37,8 +38,10 @@ public class PopupSampleContentPanel extends VerticalPanel{
 		getPersonInfo(personList);
 		
 		Button button = new Button("Close");
-		
+		button.addStyleName("exitbtn");
 		container.addStyleName("body-dialogbox");
+		
+		
 		
 		button.addClickHandler(new ClickHandler() {
 			
@@ -90,6 +93,13 @@ public class PopupSampleContentPanel extends VerticalPanel{
 
 		// Push the data into the widget.
 		personTable.setRowData(0, personList);
+		
+		if(personList.size()==0){
+			add(new HTML("<div id='nodata'>"+"Kayit Bulunamadi"+"</div>"));
+			//personTable.removeColumn(mailColumn);
+			//personTable.removeColumn(surNameColumn);
+			//personTable.removeColumn(nameColumn);
+		}
 		
 	}
 	
