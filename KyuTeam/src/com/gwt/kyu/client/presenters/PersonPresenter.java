@@ -28,6 +28,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import com.gwt.kyu.client.views.DetailView;
 import com.gwt.kyu.shared.Person;
 import com.gwt.kyu.shared.Student;
+
 public class PersonPresenter implements Presenter {
 	Display view;
 	ArrayList<Person> personList;
@@ -60,12 +61,12 @@ public class PersonPresenter implements Presenter {
 	public PersonPresenter(ArrayList<Person> personList, Display view) {
 		this.view = view;
 		this.personList = personList;
-		
+
 		String winUrl = GWT.getModuleBaseURL() + "help/";
 		String winName = "Testing Window";
-		
-		//openNewWindow(winUrl,winName);
-		
+
+		// openNewWindow(winUrl,winName);
+
 		bind();
 	}
 
@@ -94,7 +95,7 @@ public class PersonPresenter implements Presenter {
 				}
 			});
 			view.getDetail().addClickHandler(new DialogHandler(personlistInfo));
-			
+
 		} catch (Exception ex) {
 			Window.alert("HATA");
 		}
@@ -164,8 +165,8 @@ public class PersonPresenter implements Presenter {
 		checkColumn.setFieldUpdater(new FieldUpdater<Person, Boolean>() {
 			public void update(int index, Person object, Boolean value) {
 
-				//Window.alert(object.getPersonName());
-				
+				// Window.alert(object.getPersonName());
+
 			}
 		});
 
@@ -211,31 +212,45 @@ public class PersonPresenter implements Presenter {
 
 			}
 		});
-		
-		
-		
-		Column<Person, String> imageColumn = new Column<Person, String>(new ImageCell()) {
-		       @Override
-		       public String getValue(Person object) {
-		           return "detail.jpg";
-		          }
-		        };
-		        
-		        
-		        imageColumn.setFieldUpdater(new FieldUpdater<Person, String>() {
-		        public void update(int index, Person object, String value) {
-		        Window.alert("You clicked ");
-		        }
-		        
 
-		    });
+		Column<Person, String> imageColumn = new Column<Person, String>(
+				new ImageCell()) {
+			@Override
+			public String getValue(Person object) {
+				return "detail.jpg";
+			}
+		};
+
+		imageColumn.setFieldUpdater(new FieldUpdater<Person, String>() {
+			public void update(int index, Person object, String value) {
+				Window.alert("You clicked ");
+			}
+
+		});
+
+		Column<Person, String> imageColumn1 = new Column<Person, String>(
+				new ButtonImageCell()) {
+			@Override
+			public String getValue(Person object) {
+				return "detail.jpg";
+			}
+		};
+
+		imageColumn.setFieldUpdater(new FieldUpdater<Person, String>() {
+			public void update(int index, Person object, String value) {
+				Window.alert("You clicked ");
+			}
+
+		});
 
 		view.getSelectedObject().addColumn(checkColumn, "CheckBox");
 		view.getSelectedObject().addColumn(nameColumn, "Name");
 		view.getSelectedObject().addColumn(surNameColumn, "Surname");
 		view.getSelectedObject().addColumn(mailColumn, "Phone");
 		view.getSelectedObject().addColumn(Preview, "Detail");
-		view.getSelectedObject().addColumn(imageColumn,"DetailImg");
+		view.getSelectedObject().addColumn(imageColumn, "DetailImg");
+		view.getSelectedObject().addColumn(imageColumn1, "DetailImg1");
+
 
 		view.getSelectedObject().setRowCount(personList.size(), true);
 
@@ -249,20 +264,11 @@ public class PersonPresenter implements Presenter {
 		container.clear();
 		container.add(view.asWidget());
 	}
-	
-	public static void openNewWindow(String name, String url) {
-	    com.google.gwt.user.client.Window.open(url, name.replace(" ", "_"),
-	           "menubar=no," + 
-	           "location=false," + 
-	           "resizable=yes," + 
-	           "scrollbars=yes," + 
-	           "status=no," + 
-	           "dependent=true");
-	}
-	
 
-	
-	
-	
+	public static void openNewWindow(String name, String url) {
+		com.google.gwt.user.client.Window.open(url, name.replace(" ", "_"),
+				"menubar=no," + "location=false," + "resizable=yes,"
+						+ "scrollbars=yes," + "status=no," + "dependent=true");
+	}
 
 }
