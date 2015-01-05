@@ -240,6 +240,8 @@ public class PersonPresenter implements Presenter {
 			public void update(int index, Person object, String value) {
 				Window.alert("You clicked ");
 			}
+			
+			
 
 		});
 
