@@ -232,14 +232,16 @@ public class PersonPresenter implements Presenter {
 				new ButtonImageCell()) {
 			@Override
 			public String getValue(Person object) {
-				return "detail.jpg";
+				return "";
 			}
 		};
 
-		imageColumn.setFieldUpdater(new FieldUpdater<Person, String>() {
+		imageColumn1.setFieldUpdater(new FieldUpdater<Person, String>() {
 			public void update(int index, Person object, String value) {
 				Window.alert("You clicked ");
 			}
+			
+		
 			
 			
 
