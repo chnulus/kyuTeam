@@ -9,6 +9,7 @@
 	<c:CellTable ui:field="cellTablePerson"></c:CellTable>
 	<br></br>
 	<g:Button ui:field="detailBtn">Detail</g:Button>	
+	<g:Button ui:field="bolgeMudurlugu">Bölge Müdürlüğü</g:Button>
 	</center>
 	<g:ListBox ui:field="cityBox"/><br/>
 	<g:Label text="City : " ui:field="city"/>

@@ -11,12 +11,15 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -26,6 +29,7 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.gwt.kyu.client.views.DetailView;
+import com.gwt.kyu.shared.BolgeMudurlugu;
 import com.gwt.kyu.shared.Person;
 import com.gwt.kyu.shared.Student;
 
@@ -38,6 +42,8 @@ public class PersonPresenter implements Presenter {
 	Person selectedObject;
 
 	Student student;
+	
+	BolgeMudurlugu bm;
 
 	public final SingleSelectionModel<Person> ssm = new SingleSelectionModel<Person>();
 
@@ -55,17 +61,14 @@ public class PersonPresenter implements Presenter {
 		public CellTable<Person> getSelectedObject();
 
 		public HasClickHandlers getDetail();
+		
+		public Button getbolgeMudurlugu();
 
 	}
 
 	public PersonPresenter(ArrayList<Person> personList, Display view) {
 		this.view = view;
 		this.personList = personList;
-
-		String winUrl = GWT.getModuleBaseURL() + "help/";
-		String winName = "Testing Window";
-
-		// openNewWindow(winUrl,winName);
 
 		bind();
 	}
@@ -94,7 +97,13 @@ public class PersonPresenter implements Presenter {
 					personlistInfo.add(selectedObject);
 				}
 			});
+			
+			bm = new BolgeMudurlugu();
+			
 			view.getDetail().addClickHandler(new DialogHandler(personlistInfo));
+			view.getbolgeMudurlugu().addStyleName("bolgebtn");
+			view.getbolgeMudurlugu().addClickHandler(new BMDialog(bm.getBolgeMudulurlukList()));
+			//openBolgeMudurluguPage();
 
 		} catch (Exception ex) {
 			Window.alert("HATA");
@@ -273,6 +282,42 @@ public class PersonPresenter implements Presenter {
 		com.google.gwt.user.client.Window.open(url, name.replace(" ", "_"),
 				"menubar=no," + "location=false," + "resizable=yes,"
 						+ "scrollbars=yes," + "status=no," + "dependent=true");
+		
+		Window.setTitle("New Window");
+		
+		com.google.gwt.user.client.Window.addResizeHandler(new ResizeHandler() {
+			
+			@Override
+			public void onResize(ResizeEvent event) {
+				// TODO Auto-generated method stub
+				
+				int w = Window.getClientWidth()-200;
+				int h = Window.getClientHeight()-200;
+				
+				
+				
+			}
+		});
+	}
+	
+	public void openBolgeMudurluguPage(){
+		
+		
+		
+		
+//		view.getbolgeMudurlugu().addClickHandler(new ClickHandler() {
+//			
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
+//			
+//				String winUrl = GWT.getModuleBaseURL() + "help/";
+//				String winName = "Testing Window";
+//				
+//				openNewWindow(winUrl,winName);
+//				
+//			}
+//		});		
 	}
 
 }

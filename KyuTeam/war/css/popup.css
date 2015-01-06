@@ -36,3 +36,42 @@
 	width:50px;
 	position: absolute;
 }
+.bolgebtn{
+	background-color: #044481;/*rgb(29, 93, 154);*/
+	color:white;
+	border : 2px #044481 solid;
+	/*border-radius : 20px;*/
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	cursor :pointer;
+}
+#headerBm{
+	background-color: #044481;
+	color:white;
+	font-size:large;
+	padding: 0px;
+	margin-top:-140px;
+	width: 500px;
+	padding: 3px;
+	
+}
+.BmBody{
+	
+	background-image:
+    linear-gradient(
+      to bottom, 
+      #BBD3FC, 
+      white,
+      white,
+      white
+    );
+    width: 500px;
+    height: 300px;
+	
+}
+.srchTxt{
+	margin-top:-100px;
+	background-color:red;
+}
+

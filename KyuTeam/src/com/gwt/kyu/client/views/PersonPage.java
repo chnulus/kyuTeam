@@ -84,6 +84,16 @@ public class PersonPage extends Composite implements PersonPresenter.Display{
 		return cellTablePerson;
 	}
 
+	
+	@UiField
+	Button bolgeMudurlugu;
+	@Override
+	public Button getbolgeMudurlugu() {
+		// TODO Auto-generated method stub
+		return bolgeMudurlugu;
+	}
+	
+	
 
 	
 
