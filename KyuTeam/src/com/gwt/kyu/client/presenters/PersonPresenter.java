@@ -1,22 +1,27 @@
 package com.gwt.kyu.client.presenters;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.CheckboxCell;
-import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.ImageCell;
+import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -25,6 +30,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -42,7 +48,7 @@ public class PersonPresenter implements Presenter {
 	Person selectedObject;
 
 	Student student;
-	
+
 	BolgeMudurlugu bm;
 
 	public final SingleSelectionModel<Person> ssm = new SingleSelectionModel<Person>();
@@ -61,8 +67,12 @@ public class PersonPresenter implements Presenter {
 		public CellTable<Person> getSelectedObject();
 
 		public HasClickHandlers getDetail();
-		
+
 		public Button getbolgeMudurlugu();
+
+		public SimplePager getSimplePager();
+
+		public Button getControl();
 
 	}
 
@@ -97,13 +107,16 @@ public class PersonPresenter implements Presenter {
 					personlistInfo.add(selectedObject);
 				}
 			});
-			
+
 			bm = new BolgeMudurlugu();
-			
+
 			view.getDetail().addClickHandler(new DialogHandler(personlistInfo));
 			view.getbolgeMudurlugu().addStyleName("bolgebtn");
-			view.getbolgeMudurlugu().addClickHandler(new BMDialog(bm.getBolgeMudulurlukList()));
-			//openBolgeMudurluguPage();
+			view.getbolgeMudurlugu().addClickHandler(
+					new BMDialog(bm.getBolgeMudulurlukList()));
+			fillSimplePager();
+			showHidePager();
+			// openBolgeMudurluguPage();
 
 		} catch (Exception ex) {
 			Window.alert("HATA");
@@ -247,12 +260,13 @@ public class PersonPresenter implements Presenter {
 
 		imageColumn1.setFieldUpdater(new FieldUpdater<Person, String>() {
 			public void update(int index, Person object, String value) {
-				Window.alert("You clicked ");
+				// Window.alert("You clicked ");
+
+				int number = view.getSimplePager().getPageStart();
+
+				Window.alert(String.valueOf(number));
+
 			}
-			
-		
-			
-			
 
 		});
 
@@ -263,7 +277,6 @@ public class PersonPresenter implements Presenter {
 		view.getSelectedObject().addColumn(Preview, "Detail");
 		view.getSelectedObject().addColumn(imageColumn, "DetailImg");
 		view.getSelectedObject().addColumn(imageColumn1, "DetailImg1");
-
 
 		view.getSelectedObject().setRowCount(personList.size(), true);
 
@@ -282,42 +295,106 @@ public class PersonPresenter implements Presenter {
 		com.google.gwt.user.client.Window.open(url, name.replace(" ", "_"),
 				"menubar=no," + "location=false," + "resizable=yes,"
 						+ "scrollbars=yes," + "status=no," + "dependent=true");
-		
+
 		Window.setTitle("New Window");
-		
+
 		com.google.gwt.user.client.Window.addResizeHandler(new ResizeHandler() {
-			
+
 			@Override
 			public void onResize(ResizeEvent event) {
 				// TODO Auto-generated method stub
-				
-				int w = Window.getClientWidth()-200;
-				int h = Window.getClientHeight()-200;
-				
-				
-				
+
+				int w = Window.getClientWidth() - 200;
+				int h = Window.getClientHeight() - 200;
+
 			}
 		});
 	}
-	
-	public void openBolgeMudurluguPage(){
-		
-		
-		
-		
-//		view.getbolgeMudurlugu().addClickHandler(new ClickHandler() {
-//			
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				// TODO Auto-generated method stub
-//			
-//				String winUrl = GWT.getModuleBaseURL() + "help/";
-//				String winName = "Testing Window";
-//				
-//				openNewWindow(winUrl,winName);
-//				
-//			}
-//		});		
+
+	public void openBolgeMudurluguPage() {
+
+		// view.getbolgeMudurlugu().addClickHandler(new ClickHandler() {
+		//
+		// @Override
+		// public void onClick(ClickEvent event) {
+		// // TODO Auto-generated method stub
+		//
+		// String winUrl = GWT.getModuleBaseURL() + "help/";
+		// String winName = "Testing Window";
+		//
+		// openNewWindow(winUrl,winName);
+		//
+		// }
+		// });
+	}
+
+	public void fillSimplePager() {
+
+		// CellTable table = new CellTable();
+		// SimplePager.Resources pagerResources =
+		// GWT.create(SimplePager.Resources.class);
+		// SimplePager pager = new SimplePager(TextLocation.CENTER,
+		// pagerResources, false, 0, true);
+		// pager.setDisplay(table);
+		// pager.setPageSize(7);
+		// table.setPageSize(7);
+		// pager.startLoading();
+		// ListDataProvider dataProvider = new ListDataProvider();
+		// dataProvider.addDataDisplay(table);
+		// List list = (List) dataProvider.getList();
+		// for (Carrier contact : list) {
+		// list.add(contact);
+		//
+		// }
+
+		// Add a cellList to a data provider.
+		ListDataProvider<Person> dataProvider = new ListDataProvider<Person>();
+		dataProvider.addDataDisplay(view.getSelectedObject());
+		dataProvider.setList(personList);
+		view.getSimplePager().setDisplay(view.getSelectedObject());
+		view.getSimplePager().setPageSize(5);
+		// int number = view.getSimplePager().getPage();
+
+		// view.getSimplePager().startLoading();
+		// view.getSimplePager().lastPage();
+
+	}
+
+	public void showHidePager() {
+
+		view.getControl().addClickHandler(new ClickHandler() {
+			int count = 0;
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				if (count % 2 == 0) {
+					view.getSimplePager().setVisible(false);
+					view.getControl().setText("Detayi Bir Cok Sayfada Goster");
+					view.getSimplePager().setPageSize(personList.size());
+					count++;
+				} else {
+					view.getSimplePager().setPageSize(5);
+					view.getSimplePager().setVisible(true);
+					view.getControl().setText("Detayi Tek Sayfada Goster");
+
+					count++;
+				}
+			}
+		});
+	}
+
+	public void getToolTips() {
+
+		view.getControl().addMouseOverHandler(new MouseOverHandler() {
+
+			@Override
+			public void onMouseOver(MouseOverEvent event) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 	}
 
 }

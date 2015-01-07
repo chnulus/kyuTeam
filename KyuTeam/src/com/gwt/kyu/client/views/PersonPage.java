@@ -1,22 +1,16 @@
 package com.gwt.kyu.client.views;
 
-import java.util.ArrayList;
-
 import com.google.gwt.cell.client.ButtonCell;
-import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.History;
+import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwt.kyu.client.presenters.PersonPresenter;
 import com.gwt.kyu.shared.Person;
@@ -93,6 +87,22 @@ public class PersonPage extends Composite implements PersonPresenter.Display{
 		return bolgeMudurlugu;
 	}
 	
+	
+	@UiField
+	SimplePager bmPager;
+	@Override
+	public SimplePager getSimplePager() {
+		// TODO Auto-generated method stub
+		return bmPager;
+	}
+	
+	@UiField
+	Button btnControl;
+	@Override
+	public Button getControl() {
+		// TODO Auto-generated method stub
+		return btnControl;
+	}
 	
 
 	

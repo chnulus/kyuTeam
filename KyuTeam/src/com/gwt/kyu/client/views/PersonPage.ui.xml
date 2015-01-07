@@ -10,6 +10,8 @@
 	<br></br>
 	<g:Button ui:field="detailBtn">Detail</g:Button>	
 	<g:Button ui:field="bolgeMudurlugu">Bölge Müdürlüğü</g:Button>
+	<g:Button ui:field="btnControl">Detayı Tek Sayfada Göster</g:Button>
+	<c:SimplePager ui:field="bmPager" location="CENTER"/>
 	</center>
 	<g:ListBox ui:field="cityBox"/><br/>
 	<g:Label text="City : " ui:field="city"/>

@@ -29,7 +29,7 @@ public class Person {
 	public ArrayList<Person> addPersonList(){
 		Person person;
 		ArrayList<Person> person_temp=new ArrayList<Person>();
-		for(int i=1;i<5;i++){
+		for(int i=1;i<28;i++){
 			person = new Person();
 			person.setPersonName("N"+i);
 			person.setPersonSurname("S"+i);
