@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwt.kyu.client.views.NewView;
 import com.gwt.kyu.client.views.PersonPage;
 import com.gwt.kyu.shared.Person;
+import com.gwt.kyu.shared.Region;
 import com.gwt.kyu.shared.Student;
 
 public class DetailPresenter implements Presenter {
@@ -27,6 +28,8 @@ public class DetailPresenter implements Presenter {
 	Person person;
 	
 	Student student;
+	
+	Region region;
 
 	ArrayList<Student> studentList = new ArrayList<Student>();
 
@@ -74,8 +77,9 @@ public class DetailPresenter implements Presenter {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
+				region = new Region();
 				Presenter presenter = new PersonPresenter(person
-						.addPersonList(), new PersonPage());
+						.addPersonList(),region.getRegionList(), new PersonPage());
 				presenter.go(RootPanel.get());
 			}
 		});

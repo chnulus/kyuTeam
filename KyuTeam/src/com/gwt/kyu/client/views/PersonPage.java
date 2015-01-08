@@ -11,9 +11,11 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwt.kyu.client.presenters.PersonPresenter;
 import com.gwt.kyu.shared.Person;
+import com.gwt.kyu.shared.Region;
 
 public class PersonPage extends Composite implements PersonPresenter.Display{
 
@@ -104,7 +106,39 @@ public class PersonPage extends Composite implements PersonPresenter.Display{
 		return btnControl;
 	}
 	
+	@UiField
+	CellTable<Region> cellRegionTable;
+	@Override
+	public CellTable<Region> getRegionTable() {
+		// TODO Auto-generated method stub
+		return cellRegionTable;
+	}
 
+	@UiField 
+	TextBox srchTxt;
+	@Override
+	public TextBox getSrchTxt() {
+		// TODO Auto-generated method stub
+		return srchTxt;
+	}
+
+	
+	@UiField
+	Button srchBtn;
+	@Override
+	public Button getSrchBtn() {
+		// TODO Auto-generated method stub
+		return srchBtn;
+	}
+
+	@UiField
+	SimplePager regionPager;
+	
+	@Override
+	public SimplePager getRegionPager() {
+		// TODO Auto-generated method stub
+		return regionPager;
+	}
 	
 
 

@@ -12,6 +12,11 @@
 	<g:Button ui:field="bolgeMudurlugu">Bölge Müdürlüğü</g:Button>
 	<g:Button ui:field="btnControl">Detayı Tek Sayfada Göster</g:Button>
 	<c:SimplePager ui:field="bmPager" location="CENTER"/>
+	<g:TextBox ui:field="srchTxt"></g:TextBox>
+	<g:Button ui:field="srchBtn">Search</g:Button>
+	<br></br>
+	<c:CellTable ui:field="cellRegionTable"></c:CellTable>
+	<c:SimplePager ui:field="regionPager" location="CENTER"></c:SimplePager>
 	</center>
 	<g:ListBox ui:field="cityBox"/><br/>
 	<g:Label text="City : " ui:field="city"/>

@@ -18,8 +18,8 @@ public class ButtonImageCell extends ButtonCell{
 //	        SafeHtml html = SafeHtmlUtils.fromTrustedString(new Image(value).toString());
 //	        sb.append(html);
 		 
-		 String icon = "detail.jpg";
-         Image image = new Image(icon);
+		// String icon = "detail.jpg";
+         Image image = new Image(value);
          //fix the mouse pointer
          
          image.getElement().getStyle().setCursor(Cursor.POINTER);

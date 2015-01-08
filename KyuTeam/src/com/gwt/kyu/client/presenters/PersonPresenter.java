@@ -1,27 +1,21 @@
 package com.gwt.kyu.client.presenters;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.ImageCell;
-import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.SimplePager;
-import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -29,6 +23,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -37,11 +32,15 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import com.gwt.kyu.client.views.DetailView;
 import com.gwt.kyu.shared.BolgeMudurlugu;
 import com.gwt.kyu.shared.Person;
+import com.gwt.kyu.shared.Region;
 import com.gwt.kyu.shared.Student;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class PersonPresenter implements Presenter {
 	Display view;
 	ArrayList<Person> personList;
+
+	ArrayList<Region> regionList;
 
 	Presenter presenter;
 
@@ -52,6 +51,8 @@ public class PersonPresenter implements Presenter {
 	BolgeMudurlugu bm;
 
 	public final SingleSelectionModel<Person> ssm = new SingleSelectionModel<Person>();
+
+	public final SingleSelectionModel<Region> ssmRegion = new SingleSelectionModel<Region>();
 
 	public interface Display {
 		public void clear();
@@ -66,20 +67,29 @@ public class PersonPresenter implements Presenter {
 
 		public CellTable<Person> getSelectedObject();
 
+		public CellTable<Region> getRegionTable();
+
 		public HasClickHandlers getDetail();
 
 		public Button getbolgeMudurlugu();
 
 		public SimplePager getSimplePager();
 
+		public SimplePager getRegionPager();
+
 		public Button getControl();
+
+		public TextBox getSrchTxt();
+
+		public Button getSrchBtn();
 
 	}
 
-	public PersonPresenter(ArrayList<Person> personList, Display view) {
+	public PersonPresenter(ArrayList<Person> personList,
+			ArrayList<Region> regionList, Display view) {
 		this.view = view;
 		this.personList = personList;
-
+		this.regionList = regionList;
 		bind();
 	}
 
@@ -116,6 +126,9 @@ public class PersonPresenter implements Presenter {
 					new BMDialog(bm.getBolgeMudulurlukList()));
 			fillSimplePager();
 			showHidePager();
+			fillRegionTable(regionList);
+			regionPager();
+			searchRegion();
 			// openBolgeMudurluguPage();
 
 		} catch (Exception ex) {
@@ -254,7 +267,7 @@ public class PersonPresenter implements Presenter {
 				new ButtonImageCell()) {
 			@Override
 			public String getValue(Person object) {
-				return "";
+				return "detail.jpg";
 			}
 		};
 
@@ -281,6 +294,126 @@ public class PersonPresenter implements Presenter {
 		view.getSelectedObject().setRowCount(personList.size(), true);
 
 		view.getSelectedObject().setRowData(0, personList);
+
+	}
+
+	public void fillRegionTable(ArrayList<Region> regionList) {
+
+		TextColumn<Region> regionId = new TextColumn<Region>() {
+			@Override
+			public String getValue(Region object) {
+				return object.getRegionID();
+			}
+		};
+
+		// Add a date column to show the birthday.
+		TextColumn<Region> regionName = new TextColumn<Region>() {
+			@Override
+			public String getValue(Region object) {
+				return object.getRegionName();
+			}
+		};
+
+		Column<Region, String> next = new Column<Region, String>(
+				new ButtonImageCell()) {
+			@Override
+			public String getValue(Region object) {
+				return "next.jpg";
+			}
+		};
+
+		next.setFieldUpdater(new FieldUpdater<Region, String>() {
+			public void update(int index, Region object, String value) {
+				// Window.alert("You clicked ");
+
+			}
+
+		});
+
+		view.getRegionTable().addColumn(regionId, "Bolge Mudurlugu Kodu");
+		view.getRegionTable().addColumn(regionName, "Bolge Mudurlugu");
+		view.getRegionTable().addColumn(next, "");
+
+		view.getRegionTable().setRowCount(regionList.size(), true);
+
+		view.getRegionTable().setRowData(0, regionList);
+	}
+
+	public void searchRegion() {
+
+		view.getSrchBtn().addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+
+				String data = view.getSrchTxt().getText().toString().trim();
+
+				if (data.equals("") || data.equals(null) || data.length() == 0) {
+					Window.alert("Enter blank field");
+				} else {
+
+					if (data.matches("[0-9]*")) {
+						regionList = searchRegionId(data);
+					} else {
+						regionList =searchRegionName(data);
+
+					}
+
+				}
+
+			}
+		});
+
+	}
+
+	ArrayList<Region> resultRegion;
+
+	Region region;
+
+	public ArrayList<Region> searchRegionId(String data) {
+
+		resultRegion = new ArrayList<Region>();
+
+		for (int i = 0; i < regionList.size(); i++) {
+
+			if (regionList.get(i).getRegionID().startsWith(data)) {
+
+				region = new Region();
+
+				region.setRegionID(regionList.get(i).getRegionID());
+				region.setRegionName(regionList.get(i).getRegionName());
+
+				resultRegion.add(region);
+
+			}
+
+		}
+
+		return resultRegion;
+
+	}
+
+	public ArrayList<Region> searchRegionName(String data) {
+
+		resultRegion = new ArrayList<Region>();
+
+		for (int i = 0; i < regionList.size(); i++) {
+
+			if (regionList.get(i).getRegionName().endsWith(data)) {
+
+				region = new Region();
+
+				region.setRegionID(regionList.get(i).getRegionID());
+				region.setRegionName(regionList.get(i).getRegionName());
+
+				resultRegion.add(region);
+
+			}
+
+		}
+		
+		return resultRegion;
 
 	}
 
@@ -357,6 +490,16 @@ public class PersonPresenter implements Presenter {
 
 		// view.getSimplePager().startLoading();
 		// view.getSimplePager().lastPage();
+
+	}
+
+	public void regionPager() {
+		Window.alert(String.valueOf(regionList.size()));
+		ListDataProvider<Region> dataProvider = new ListDataProvider<Region>();
+		dataProvider.addDataDisplay(view.getRegionTable());
+		dataProvider.setList(regionList);
+		view.getRegionPager().setDisplay(view.getRegionTable());
+		view.getRegionPager().setPageSize(10);
 
 	}
 
