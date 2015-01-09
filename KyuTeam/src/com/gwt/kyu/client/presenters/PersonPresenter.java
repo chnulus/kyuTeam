@@ -82,6 +82,8 @@ public class PersonPresenter implements Presenter {
 		public TextBox getSrchTxt();
 
 		public Button getSrchBtn();
+		
+		public Label getRegionMessage();
 
 	}
 
@@ -355,13 +357,12 @@ public class PersonPresenter implements Presenter {
 
 					if (data.matches("[0-9]*")) {
 						regionList = searchRegionId(data);
-						Window.alert(String.valueOf(regionList.size())+" "+data);
 						regionPager();
-						
+						showMessage(regionList.size());						
 					} else {
 						regionList =searchRegionName(data);
-						Window.alert(String.valueOf(regionList.size())+" "+data);
 						regionPager();
+						showMessage(regionList.size());
 					}
 
 				}
@@ -369,6 +370,19 @@ public class PersonPresenter implements Presenter {
 			}
 		});
 
+	}
+	
+	public void showMessage(int regionListsize){
+		
+		if(regionListsize == 0){
+			view.getRegionMessage().setText("Kayit Bulunamadi");
+			view.getRegionPager().setVisible(false);
+		}
+		else{
+			view.getRegionMessage().setText("");
+			view.getRegionPager().setVisible(true);
+		}
+		
 	}
 
 	ArrayList<Region> resultRegion;
@@ -404,7 +418,6 @@ public class PersonPresenter implements Presenter {
 		region  = new Region();
 			
 		if(regionList.size()<region.getRegionList().size()){
-			Window.alert(String.valueOf("Size: "+regionList.size()));
 			regionList = region.getRegionList();
 		}
 		
@@ -420,7 +433,6 @@ public class PersonPresenter implements Presenter {
 		for (int i = 0; i < regionList.size(); i++) {
 			
 			if (regionList.get(i).getRegionName().endsWith(data)) {
-				Window.alert("sds");
 				region = new Region();
 
 				region.setRegionID(regionList.get(i).getRegionID());

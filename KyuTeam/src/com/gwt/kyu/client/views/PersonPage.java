@@ -139,6 +139,15 @@ public class PersonPage extends Composite implements PersonPresenter.Display{
 		// TODO Auto-generated method stub
 		return regionPager;
 	}
+
+	@UiField
+	Label regionMessage;
+	
+	@Override
+	public Label getRegionMessage() {
+		// TODO Auto-generated method stub
+		return regionMessage;
+	}
 	
 
 

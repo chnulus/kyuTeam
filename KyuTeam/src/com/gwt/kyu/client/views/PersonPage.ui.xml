@@ -17,6 +17,7 @@
 			<g:TextBox ui:field="srchTxt"></g:TextBox>
 			<g:Button ui:field="srchBtn">Search</g:Button>
 			<c:CellTable ui:field="cellRegionTable"></c:CellTable>
+			<g:Label ui:field="regionMessage"></g:Label>
 			<c:SimplePager ui:field="regionPager" location="CENTER"></c:SimplePager>
 		</center>
 		<g:ListBox ui:field="cityBox" />
