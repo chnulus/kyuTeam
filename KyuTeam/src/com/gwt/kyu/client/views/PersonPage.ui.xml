@@ -1,24 +1,26 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:c="urn:import:com.google.gwt.user.cellview.client">
-	<ui:style>	
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.cellview.client">
+	<ui:style>
+	
 	</ui:style>
 	<g:HTMLPanel>
-	<center>
-	<c:CellTable ui:field="cellTablePerson"></c:CellTable>
-	<br></br>
-	<g:Button ui:field="detailBtn">Detail</g:Button>	
-	<g:Button ui:field="bolgeMudurlugu">Bölge Müdürlüğü</g:Button>
-	<g:Button ui:field="btnControl">Detayı Tek Sayfada Göster</g:Button>
-	<c:SimplePager ui:field="bmPager" location="CENTER"/>
-	<g:TextBox ui:field="srchTxt"></g:TextBox>
-	<g:Button ui:field="srchBtn">Search</g:Button>
-	<br></br>
-	<c:CellTable ui:field="cellRegionTable"></c:CellTable>
-	<c:SimplePager ui:field="regionPager" location="CENTER"></c:SimplePager>
-	</center>
-	<g:ListBox ui:field="cityBox"/><br/>
-	<g:Label text="City : " ui:field="city"/>
+		<center>
+			<c:CellTable ui:field="cellTablePerson"></c:CellTable>
+			<br></br>
+			<g:Button ui:field="detailBtn">Detail</g:Button>
+			<g:Button ui:field="bolgeMudurlugu">Bölge Müdürlüğü</g:Button>
+			<g:Button ui:field="btnControl">Detayı Tek Sayfada Göster</g:Button>
+			<c:SimplePager ui:field="bmPager" location="CENTER" />
+			<br></br>
+			<br></br>
+			<g:TextBox ui:field="srchTxt"></g:TextBox>
+			<g:Button ui:field="srchBtn">Search</g:Button>
+			<c:CellTable ui:field="cellRegionTable"></c:CellTable>
+			<c:SimplePager ui:field="regionPager" location="CENTER"></c:SimplePager>
+		</center>
+		<g:ListBox ui:field="cityBox" />
+		<br />
+		<g:Label text="City : " ui:field="city" />
 	</g:HTMLPanel>
 </ui:UiBinder> 

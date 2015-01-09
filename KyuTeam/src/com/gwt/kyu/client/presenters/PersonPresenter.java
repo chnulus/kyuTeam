@@ -355,9 +355,13 @@ public class PersonPresenter implements Presenter {
 
 					if (data.matches("[0-9]*")) {
 						regionList = searchRegionId(data);
+						Window.alert(String.valueOf(regionList.size())+" "+data);
+						regionPager();
+						
 					} else {
 						regionList =searchRegionName(data);
-
+						Window.alert(String.valueOf(regionList.size())+" "+data);
+						regionPager();
 					}
 
 				}
@@ -374,16 +378,17 @@ public class PersonPresenter implements Presenter {
 	public ArrayList<Region> searchRegionId(String data) {
 
 		resultRegion = new ArrayList<Region>();
-
+		
+		controlArray();
+		
 		for (int i = 0; i < regionList.size(); i++) {
 
 			if (regionList.get(i).getRegionID().startsWith(data)) {
 
 				region = new Region();
-
+			
 				region.setRegionID(regionList.get(i).getRegionID());
 				region.setRegionName(regionList.get(i).getRegionName());
-
 				resultRegion.add(region);
 
 			}
@@ -393,15 +398,29 @@ public class PersonPresenter implements Presenter {
 		return resultRegion;
 
 	}
+	
+	public void controlArray(){
+		
+		region  = new Region();
+			
+		if(regionList.size()<region.getRegionList().size()){
+			Window.alert(String.valueOf("Size: "+regionList.size()));
+			regionList = region.getRegionList();
+		}
+		
+	}
 
 	public ArrayList<Region> searchRegionName(String data) {
 
 		resultRegion = new ArrayList<Region>();
 
+		
+		controlArray();
+		
 		for (int i = 0; i < regionList.size(); i++) {
-
+			
 			if (regionList.get(i).getRegionName().endsWith(data)) {
-
+				Window.alert("sds");
 				region = new Region();
 
 				region.setRegionID(regionList.get(i).getRegionID());
@@ -494,12 +513,13 @@ public class PersonPresenter implements Presenter {
 	}
 
 	public void regionPager() {
-		Window.alert(String.valueOf(regionList.size()));
 		ListDataProvider<Region> dataProvider = new ListDataProvider<Region>();
 		dataProvider.addDataDisplay(view.getRegionTable());
 		dataProvider.setList(regionList);
 		view.getRegionPager().setDisplay(view.getRegionTable());
-		view.getRegionPager().setPageSize(10);
+		view.getRegionPager().setPageSize(5);
+	
+		
 
 	}
 
